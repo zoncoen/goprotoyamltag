@@ -89,6 +89,9 @@ func add(field *ast.Field) error {
 	} else {
 		name = field.Names[0].Name
 	}
+	if !ast.IsExported(name) {
+		return nil
+	}
 
 	if field.Tag == nil {
 		field.Tag = &ast.BasicLit{

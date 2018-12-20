@@ -29,6 +29,14 @@ func TestAdd(t *testing.T) {
 				},
 			},
 		},
+		"not exported field": {
+			field: &ast.Field{
+				Names: []*ast.Ident{&ast.Ident{Name: "fieldName"}},
+			},
+			expected: &ast.Field{
+				Names: []*ast.Ident{&ast.Ident{Name: "fieldName"}},
+			},
+		},
 		"no tag": {
 			field: &ast.Field{
 				Names: []*ast.Ident{&ast.Ident{Name: "FieldName"}},
