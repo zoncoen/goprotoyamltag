@@ -34,7 +34,7 @@ func main() {
 
 func realMain(filepath string) error {
 	fset := token.NewFileSet()
-	f, err := parser.ParseFile(fset, filepath, nil, parser.AllErrors)
+	f, err := parser.ParseFile(fset, filepath, nil, parser.ParseComments)
 	if err != nil {
 		return errors.Wrap(err, "failed to parse")
 	}
