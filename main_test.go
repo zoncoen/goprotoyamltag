@@ -65,6 +65,34 @@ func TestAdd(t *testing.T) {
 				},
 			},
 		},
+		"ignore": {
+			field: &ast.Field{
+				Names: []*ast.Ident{&ast.Ident{Name: "XXX_FieldName"}},
+			},
+			expected: &ast.Field{
+				Names: []*ast.Ident{&ast.Ident{Name: "XXX_FieldName"}},
+				Tag: &ast.BasicLit{
+					Kind:  token.STRING,
+					Value: "`yaml:\"-\"`",
+				},
+			},
+		},
+		"protobuf_oneof": {
+			field: &ast.Field{
+				Names: []*ast.Ident{&ast.Ident{Name: "FieldName"}},
+				Tag: &ast.BasicLit{
+					Kind:  token.STRING,
+					Value: "`protobuf_oneof:\"field_name\"`",
+				},
+			},
+			expected: &ast.Field{
+				Names: []*ast.Ident{&ast.Ident{Name: "FieldName"}},
+				Tag: &ast.BasicLit{
+					Kind:  token.STRING,
+					Value: "`protobuf_oneof:\"field_name\" yaml:\",inline\"`",
+				},
+			},
+		},
 	}
 	for name, test := range tests {
 		test := test

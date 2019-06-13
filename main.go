@@ -116,6 +116,11 @@ func add(field *ast.Field) error {
 			Key:  "yaml",
 			Name: "-",
 		})
+	} else if _, err := tags.Get("protobuf_oneof"); err == nil {
+		tags.Set(&structtag.Tag{
+			Key:     "yaml",
+			Options: []string{"inline"},
+		})
 	} else {
 		tags.Set(&structtag.Tag{
 			Key:     "yaml",
