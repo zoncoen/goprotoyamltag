@@ -125,8 +125,16 @@ func TestCamelCase(t *testing.T) {
 			expected: "a",
 		},
 		{
-			str:      "AAAAA",
-			expected: "aAAAA",
+			str:      "ID",
+			expected: "id",
+		},
+		{
+			str:      "UserID",
+			expected: "userID",
+		},
+		{
+			str:      "RPCType",
+			expected: "rpcType",
 		},
 	}
 	for _, test := range tests {

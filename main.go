@@ -11,6 +11,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"unicode"
 
 	"github.com/alecthomas/kingpin"
 	"github.com/fatih/structtag"
@@ -137,6 +138,17 @@ func camelCase(str string) string {
 	if str == "" {
 		return str
 	}
-	str = strings.ToLower(string(str[0])) + str[1:]
-	return str
+	for i, r := range str {
+		if unicode.IsLower(r) {
+			if i == 0 {
+				return str
+			}
+			if i == 1 {
+				return strings.ToLower(string(str[0])) + str[1:]
+			} else {
+				return strings.ToLower(str[:i-1]) + str[i-1:]
+			}
+		}
+	}
+	return strings.ToLower(str)
 }
